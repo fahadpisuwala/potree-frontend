@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Potree Annotation Manager</title>
+
+  <link rel="stylesheet" href="build/potree/potree.css" />
+  <link rel="stylesheet" href="libs/jquery-ui/jquery-ui.min.css" />
+  <link rel="stylesheet" href="libs/openlayers3/ol.css" />
+  <link rel="stylesheet" href="libs/spectrum/spectrum.css" />
+  <link rel="stylesheet" href="libs/jstree/themes/mixed/style.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="potree_container">
+    <div id="potree_render_area"></div>
+
+    <div class="ui-panel">
+      <button class="btn" id="listBtn">📋 Show Annotations</button>
+      <button class="btn" id="clearBtn" style="color:red">Clear All</button>
+    </div>
+
+    <div id="list_panel">
+      <h3>My Annotations</h3>
+      <ul id="ann_items"></ul>
+      <div class="delete_hint">Double-click an item to delete</div>
+    </div>
+  </div>
+
+  <!-- potree deps -->
+  <script src="libs/jquery/jquery-3.1.1.min.js"></script>
+  <script src="libs/jquery-ui/jquery-ui.min.js"></script>
+  <script src="libs/other/BinaryHeap.js"></script>
+  <script src="libs/tween/tween.min.js"></script>
+  <script src="libs/d3/d3.js"></script>
+  <script src="libs/proj4/proj4.js"></script>
+  <script src="libs/openlayers3/ol.js"></script>
+  <script src="libs/i18next/i18next.js"></script>
+  <script src="libs/spectrum/spectrum.js"></script>
+  <script src="libs/jstree/jstree.js"></script>
+  <script src="build/potree/potree.js"></script>
+
+  <!-- ONE entry file -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
