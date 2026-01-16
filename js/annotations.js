@@ -7,19 +7,19 @@ import {
 } from "./api.js";
 
 let annotations = [];
-function generateUUID() { // RFC4122 version 4 compliant
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    const r = Math.random() * 16 | 0;
-    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+function generateUUID() {
+  // RFC4122 version 4 compliant
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }
 
-
 export async function loadAnnotations(viewer) {
   const res = await getAnnotations();
 
-  annotations = res.map(a => ({
+  annotations = res.map((a) => ({
     id: a._id,
     text: a.text,
     position: a.position.position,
@@ -32,7 +32,7 @@ export function renderAnnotations(viewer) {
   const root = viewer.scene.annotations;
   while (root.children.length) root.remove(root.children[0]);
 
-  annotations.forEach(a => {
+  annotations.forEach((a) => {
     const ann = new Potree.Annotation({
       position: new THREE.Vector3(a.position.x, a.position.y, a.position.z),
       title: "Annotation",
@@ -52,15 +52,13 @@ export async function updateList(viewer) {
 
   const data = await getAnnotations();
 
-  data.forEach(a => {
+  data.forEach((a) => {
     const li = document.createElement("li");
     li.className = "ann_entry";
     li.innerHTML = `<b>${a.text}</b>`;
 
     li.onclick = () => {
-      const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(0.1)
-      );
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.1));
       mesh.position.set(a.position.x, a.position.y, a.position.z);
       viewer.zoomTo(mesh, 3);
     };
@@ -83,7 +81,7 @@ export async function clearAll(viewer) {
 }
 
 export async function addOnClick(viewer, pos, text) {
-  console.log("Adding annotation at", pos, "with text:", text);
+  const trimmedText = text.length > 256 ? text.substring(0, 256) : text;
   const payload = {
     potreeid: generateUUID(),
     position: pos,
