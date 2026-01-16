@@ -85,7 +85,7 @@ export async function addOnClick(viewer, pos, text) {
   const payload = {
     potreeid: generateUUID(),
     position: pos,
-    text,
+    text: trimmedText,
   };
 
   await addAnnotation(payload);
